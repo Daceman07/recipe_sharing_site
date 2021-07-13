@@ -1,0 +1,79 @@
+{% extends 'category/base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Find and Share Favorite Recipes! </h1>
+            <p class="lead text-muted">Cooking is fantastic, but its better when we share the food we love with people
+                who enjoy it. Click below to get started</p>
+            <p>
+                <a href="{% url 'create_category' %}" class="btn btn-primary"> Create your food category</a>
+            </p>
+        </div>
+    </section>
+
+    <div class="container">
+        <h1 class="text-center">Popular Categories</h1>
+        <br>
+        <div class="row">
+            <div class="row col-6">
+                {% for item in popular_categories %}
+                    {% for res in item %}
+                        <div class="col-md-6 mt-3">
+                            <div class="card mb-6 shadow-sm">
+                                <div class="card-body">
+
+                                    <p class="card-text">{{ res.picture }}</p>
+                                    <p class="card-text">{{ res.user }}'s {{ res.title }} recipes</p>
+                                    <a href="{% url 'detail_category' res.id %}"><p class="card-text">{{ res.title }}</p></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                {% endfor %}
+            </div>
+
+            <div class="col-md-6 mt-3">
+
+                <div class="card mb-6 shadow-sm">
+                    <div class="card-body">
+                        <img src="{% static 'pic2.jpg' %}" class="img-fluid" alt="wok">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <h1 class="text-center">Recent Categories</h1>
+        <br>
+
+        <div class="row">
+            <div class="col-md-6 mt-3">
+                <div class="card mb-6 shadow-sm">
+                    <div class="card-body">
+                        <img src="{% static 'pic1.jpg' %}" class="img-fluid" alt="cutting board">
+                    </div>
+                </div>
+            </div>
+            <div class="row col-6">
+                {% for item in recent_categories %}
+                    <div class="col-md-6 mt-3">
+                        <div class="card mb-6 shadow-sm">
+                            <div class="card-body">
+                                <p class="card-text">{{ item.picture }}</p>
+                                <p class="card-text">{{ item.user }}'s {{ item.title }} recipes</p>
+                                <a href="{% url 'detail_category' item.id %}"><p class="card-text">{{ item.title }}</p></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

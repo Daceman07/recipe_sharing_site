@@ -1,0 +1,28 @@
+{% extends 'category/base.html' %}
+
+{% block content %}
+<br>
+
+  <div class="container">
+
+      <h1>{{ recipe.title }}</h1>
+
+{#      {% if recipe.picture %}#}
+{#      <h3><img src="{{ recipe.images }}" alt="{{ recipe.title }}"></h3>#}
+{#      {% endif %}#}
+
+       <br>
+      <h6>Servings: {{ recipe.servings }}</h6>
+       <br>
+      <h5><strong><u><i>Prep Time: {{ recipe.prep_time }}</i></u></strong></h5>
+       <br>
+      <h4><strong><u>Ingredients</u>:</strong> {{ recipe.ingredients|linebreaks }}</h4>
+       <br>
+      <h5><strong><u><i>Cook Time: {{ recipe.cook_time }}</i></u></strong></h5>
+       <br>
+      <h4><strong><u>Directions</u>:</strong> {{ recipe.directions|linebreaks }}</h4>
+       <br>
+  <h4 class="text-muted">{{ category.user }}</h4>
+  </div>
+      <a href="{% url 'home' %}" class="btn btn-primary">Home</a>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'category/base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="text-center">
+            <h1>{{ user.username }}'s Recipes</h1>
+            <a href="{% url 'create_category' %}" class="btn btn-primary"> Create new category for recipes</a>
+
+        </div>
+    <br>
+        <div class="text-center"><h4><strong>To edit a recipe click on the category it belongs to</strong></h4></div>
+
+
+        {% for item in categories %}
+
+            <h2> <a href="{% url 'detail_category' item.id %}">{{ item.title }}</a> </h2>
+            <a href="{% url 'delete_category' item.id %}" class="btn btn-danger"> Delete</a>
+            <a href="{% url 'update_category' item.id %}" class="btn btn-primary">Update</a>
+            <a href="{% url 'add_recipe' item.id %}" class="btn btn-primary"> Add Recipe</a>
+
+            <div class="row">
+                {% for res in item.recipe_set.all %}
+
+                    <div class="col-md-4 mt-3">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body">
+                                <p class="card-text">{{ res.title }}</p>
+                                <p class="card-text">{{ res.picture }}</p>
+                                <a href="{% url 'detail_recipe' res.id %}">Recipe</a>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'category/base.html' %}
+
+{% block content %}
+
+  <div class="container">
+  <h1>{{ category.title }}</h1>
+  <h4 class="text-muted">{{ category.user.username }}</h4>
+
+
+  {% if user.id == category.user.id %}
+            <a href="{% url 'delete_category' category.id %}" class="btn btn-danger"> Delete</a>
+            <a href="{% url 'update_category' category.id %}" class="btn btn-primary">Update</a>
+            <a href="{% url 'add_recipe' category.id %}" class="btn btn-primary">Add</a>
+{% endif %}
+   <h3>If editing at the end of steps add a space by entering a line break at the end of ingredients and directions</h3>
+            <div class="row">
+                {% for res in category.recipe_set.all %}
+
+
+                    <div class="col-md-4 mt-3">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body">
+                                <p><a href="{% url 'detail_recipe' res.id %}">{{ res.title }}</a></p>
+
+                                <br>
+                                <br>
+                                {% if user.id == category.user.id %}
+                                    <a href="{% url 'delete_recipe' res.id %}" class="btn btn-danger"> Delete </a>
+                                    <a href="{% url 'update_recipe' res.id %}" class="btn btn-warning"> Edit </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
+
+
+  </div>
+
+{% endblock %}
